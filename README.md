@@ -1,2 +1,0 @@
-# kamelets
-Kamelets specification draft
