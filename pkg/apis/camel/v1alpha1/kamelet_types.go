@@ -1,24 +1,28 @@
 package v1alpha1
 
 import (
+	camelv1 "github.com/apache/camel-k/pkg/apis/camel/v1"
+	openapi "github.com/go-openapi/spec"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
-
 // KameletSpec defines the desired state of Kamelet
 type KameletSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
-	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
+	Parameters   []KameletParameter  `json:"parameters,omitempty"`
+	Source       *camelv1.SourceSpec `json:"sources,omitempty"`
+	Flow         *camelv1.Flow       `json:"flow,omitempty"`
+	Dependencies []string            `json:"dependencies,omitempty"`
+}
+
+type KameletParameter struct {
+	Name        string          `json:"name,omitempty"`
+	Required    bool            `json:"required,omitempty"`
+	Description string          `json:"description,omitempty"`
+	Schema      *openapi.Schema `json:"schema,omitempty"`
 }
 
 // KameletStatus defines the observed state of Kamelet
 type KameletStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
-	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

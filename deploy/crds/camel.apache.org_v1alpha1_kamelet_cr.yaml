@@ -1,7 +1,17 @@
 apiVersion: camel.apache.org/v1alpha1
 kind: Kamelet
 metadata:
-  name: example-kamelet
+  name: ping
 spec:
-  # Add fields here
-  size: 3
+  parameters:
+    - name: message
+      description: The message to generate
+      schema:
+        type: string
+  flow:
+    from:
+      uri: timer:tick
+      steps:
+        - set-body:
+            constant: "Hello [here there'll be the message] !!!"
+        - to: "log:info"
