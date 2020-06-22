@@ -8,10 +8,23 @@ import (
 
 // KameletSpec defines the desired state of Kamelet
 type KameletSpec struct {
+	Info         KameletInfo         `json:"info,omitempty"`
 	Parameters   []KameletParameter  `json:"parameters,omitempty"`
 	Source       *camelv1.SourceSpec `json:"sources,omitempty"`
 	Flow         *camelv1.Flow       `json:"flow,omitempty"`
 	Dependencies []string            `json:"dependencies,omitempty"`
+}
+
+type KameletInfo struct {
+	DisplayName string      `json:"displayName,omitempty"`
+	Description string      `json:"description,omitempty"`
+	Group       string      `json:"group,omitempty"`
+	Icon        KameletIcon `json:"icon,omitempty"`
+}
+
+type KameletIcon struct {
+	Data      string `json:"data,omitempty"`
+	MediaType string `json:"mediaType,omitempty"`
 }
 
 type KameletParameter struct {

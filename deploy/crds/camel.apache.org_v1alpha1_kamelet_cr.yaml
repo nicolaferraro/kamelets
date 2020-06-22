@@ -3,6 +3,8 @@ kind: Kamelet
 metadata:
   name: ping
 spec:
+  displayName: "Ping"
+  description: "A Ping Kamelet"
   parameters:
     - name: message
       description: The message to generate
